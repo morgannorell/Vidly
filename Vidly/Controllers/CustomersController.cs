@@ -4,43 +4,38 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
-using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
-        // GET: Customer
-        List<Customer> customerList = new List<Customer>
+        private ApplicationDbContext _context;
+
+        public CustomersController()
         {
-            new Customer { Id = 1, Name = "Morgan Norell" },
-            new Customer { Id = 2, Name ="Therese Sallander" },
-            new Customer { Id = 3, Name = "Isac Norell" },
-            new Customer { Id = 4, Name = "Emma Norell"  },
-            new Customer { Id = 5, Name = "Elise Jägrup Sallander" }
-        };
-
-        public ActionResult Index()
-        {           
-            var ViewModel = new CustomerViewModel
-            {
-                Customers = customerList
-            };
-
-            return View(ViewModel);
+            _context = new ApplicationDbContext();
         }
 
-        [Route("Customers/Detail/{Id}")]
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        public ActionResult Index()
+        {
+            var customers = _context.Customers.ToList();
+            
+            return View(customers);
+        }
+
+        //[Route("Customers/Detail/{Id}")]
         public ActionResult Details(int id)
         {
-            Movie customer = new Movie();
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
-            foreach (var c in customerList)
-            {
-                if (c.Id == id)
-                    customer.Name = c.Name;       
-            }
-
+            if (customer == null)
+                return HttpNotFound();
+            
             return View(customer);          
         }
     }
