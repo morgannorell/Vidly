@@ -207,9 +207,34 @@
     <Compile Include="Migrations\201703080039154_ChangeBirthdateProperties.Designer.cs">
       <DependentUpon>201703080039154_ChangeBirthdateProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703080851137_DBChanges.cs" />
+    <Compile Include="Migrations\201703080851137_DBChanges.Designer.cs">
+      <DependentUpon>201703080851137_DBChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703081218493_ReflectingChanges.cs" />
+    <Compile Include="Migrations\201703081218493_ReflectingChanges.Designer.cs">
+      <DependentUpon>201703081218493_ReflectingChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703081309050_AddGenreToTable.cs" />
+    <Compile Include="Migrations\201703081309050_AddGenreToTable.Designer.cs">
+      <DependentUpon>201703081309050_AddGenreToTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703081732091_AddColumnsToMovieTable.cs" />
+    <Compile Include="Migrations\201703081732091_AddColumnsToMovieTable.Designer.cs">
+      <DependentUpon>201703081732091_AddColumnsToMovieTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703082037523_AddGenreTypeTableAndColumnsInGenreTable.cs" />
+    <Compile Include="Migrations\201703082037523_AddGenreTypeTableAndColumnsInGenreTable.Designer.cs">
+      <DependentUpon>201703082037523_AddGenreTypeTableAndColumnsInGenreTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703082130129_AddFKToGenreTypeTable.cs" />
+    <Compile Include="Migrations\201703082130129_AddFKToGenreTypeTable.Designer.cs">
+      <DependentUpon>201703082130129_AddFKToGenreTypeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\GenreType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
@@ -218,6 +243,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
+    <Compile Include="ViewModels\NewCustomerViewModel.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +307,8 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Views\Movies\MoviesForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,6 +345,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703080039154_ChangeBirthdateProperties.resx">
       <DependentUpon>201703080039154_ChangeBirthdateProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703080851137_DBChanges.resx">
+      <DependentUpon>201703080851137_DBChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703081218493_ReflectingChanges.resx">
+      <DependentUpon>201703081218493_ReflectingChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703081309050_AddGenreToTable.resx">
+      <DependentUpon>201703081309050_AddGenreToTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703081732091_AddColumnsToMovieTable.resx">
+      <DependentUpon>201703081732091_AddColumnsToMovieTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703082037523_AddGenreTypeTableAndColumnsInGenreTable.resx">
+      <DependentUpon>201703082037523_AddGenreTypeTableAndColumnsInGenreTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703082130129_AddFKToGenreTypeTable.resx">
+      <DependentUpon>201703082130129_AddFKToGenreTypeTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

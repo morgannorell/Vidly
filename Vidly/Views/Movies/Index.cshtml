@@ -1,30 +1,34 @@
-﻿@model Vidly.ViewModels.MovieViewModel
+﻿@model IEnumerable<Vidly.Models.Movie>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Model.movies.Count == 0)
+@if (!Model.Any())
 {
     <h3>Det finns inga filmer upplagda än.</h3>
 }
 else
 {
-    <h2>Customers</h2>
+    <h2>Movies</h2>
+
+    <a href="@Url.Action("New")" class="btn btn-primary btn-md">New Movie</a>
+    <p></p>
+
     <div class="col-md-12">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <td><b>Customers</b></td>
+                    <th><b>Customers</b></th>
+                    <th>Genre</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var movie in Model.movies)
+                @foreach (var movie in Model)
                 {
                     <tr>
-                        <td>
-                            @movie.Name
-                        </td>
+                        <td>@Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)</td>
+                        <td>@movie.GenreType.Name</td>
                     </tr>
                 }
             </tbody>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,16 +10,71 @@ using Vidly.ViewModels;
 namespace Vidly.Controllers
 {
     public class MoviesController : Controller
-    {
-        List<Movie> movieList = new List<Movie>
-        {
-            new Movie { Id = 1, Name = "Shrek" },
-            new Movie { Id = 2, Name = "Star Wars" },
-            new Movie { Id = 3, Name = "Star Trek" },
-            new Movie { Id = 4, Name = "Batman Returns"  },
-            new Movie { Id = 5, Name = "Arrow" }
-        };
+    {        
+        private ApplicationDbContext _context;
 
+        public MoviesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        public ViewResult Index()
+        {
+            var movies = _context.Movies.Include(c => c.GenreType).ToList();
+            
+            return View(movies);
+        }
+        
+        public ActionResult Edit(int id)
+        {
+            var movies = _context.Movies.SingleOrDefault(c => c.Id == id);
+
+            if (movies == null)
+                return HttpNotFound();
+
+            var ViewModel = new MovieViewModel
+            {
+                Movie = movies,
+                GenreTypes = _context.Genres.ToList()
+            };
+
+            return View("MoviesForm", ViewModel);
+        }
+
+        public ActionResult New()
+        {
+            return View("MoviesForm");
+        }
+
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+                _context.Movies.Add(movie);
+            else
+            {
+                var moviesInDb = _context.Movies.Single(c => c.Id == movie.Id);
+
+                moviesInDb.Name = movie.Name;
+                //moviesInDb.Genre = movie.Genre;
+                moviesInDb.ReleaseDate = movie.ReleaseDate;
+                moviesInDb.DateAdded = movie.DateAdded;
+                moviesInDb.NumberInStock = movie.NumberInStock;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
+        }
+
+        public ActionResult Cancel()
+        {
+            return RedirectToAction("Index", "Movies");
+        }
         // GET: Movies/Random
         public ActionResult Random()
         {
@@ -45,21 +101,8 @@ namespace Vidly.Controllers
             return Content(year + "/" + month);
         }
 
-        public ActionResult Edit(int id)
-        {
-            return Content("id=" + id);
-        }
-
         // movies
-        public ActionResult Index()
-        {
-            var ViewModel = new MovieViewModel
-            {
-                movies = movieList
-            };
-
-            return View(ViewModel);
-        }
+        
         //public ActionResult Index(int? pageIndex, string sortBy)
         //{
         //    if (!pageIndex.HasValue)
