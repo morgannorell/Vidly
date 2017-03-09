@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201703082130129_AddFKToGenreTypeTable.Designer.cs">
       <DependentUpon>201703082130129_AddFKToGenreTypeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703090903328_GenreTypes.cs" />
+    <Compile Include="Migrations\201703090903328_GenreTypes.Designer.cs">
+      <DependentUpon>201703090903328_GenreTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -363,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703082130129_AddFKToGenreTypeTable.resx">
       <DependentUpon>201703082130129_AddFKToGenreTypeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703090903328_GenreTypes.resx">
+      <DependentUpon>201703090903328_GenreTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,10 +1,10 @@
 ﻿@model Vidly.ViewModels.MovieViewModel
 @{
-    ViewBag.Title = "MoviesForm";
+    ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit Movies</h2>
+<h2>@Model.Title</h2>
 
 @using (Html.BeginForm("Save", "Movies"))
 {
@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.GenreTypeId)
-        @Html.DropDownListFor(m => m.Movie.GenreTypeId, new SelectList(Model.GenreTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.Movie.GenreTypeId, new SelectList(Model.GenreTypes, "Id", "Name"), "Select Movie Genre", new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.ReleaseDate)

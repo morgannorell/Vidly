@@ -29,7 +29,18 @@ namespace Vidly.Controllers
             
             return View(movies);
         }
-        
+
+        public ActionResult New()
+        {
+            var genres = _context.Genres.ToList();
+            var ViewModel = new MovieViewModel
+            {
+                GenreTypes = genres
+            };
+
+            return View("MoviesForm", ViewModel);
+        }
+
         public ActionResult Edit(int id)
         {
             var movies = _context.Movies.SingleOrDefault(c => c.Id == id);
@@ -44,13 +55,9 @@ namespace Vidly.Controllers
             };
 
             return View("MoviesForm", ViewModel);
-        }
+        }        
 
-        public ActionResult New()
-        {
-            return View("MoviesForm");
-        }
-
+        [HttpPost]
         public ActionResult Save(Movie movie)
         {
             if (movie.Id == 0)
@@ -60,7 +67,7 @@ namespace Vidly.Controllers
                 var moviesInDb = _context.Movies.Single(c => c.Id == movie.Id);
 
                 moviesInDb.Name = movie.Name;
-                //moviesInDb.Genre = movie.Genre;
+                moviesInDb.GenreTypeId = movie.GenreTypeId;
                 moviesInDb.ReleaseDate = movie.ReleaseDate;
                 moviesInDb.DateAdded = movie.DateAdded;
                 moviesInDb.NumberInStock = movie.NumberInStock;
@@ -71,35 +78,35 @@ namespace Vidly.Controllers
             return RedirectToAction("Index", "Movies");
         }
 
-        public ActionResult Cancel()
-        {
-            return RedirectToAction("Index", "Movies");
-        }
+        //public ActionResult Cancel()
+        //{
+        //    return RedirectToAction("Index", "Movies");
+        //}
         // GET: Movies/Random
-        public ActionResult Random()
-        {
-            var movie = new Movie() { Name = "Shrek!" };
-            var customers = new List<Movie>
-            {
-                new Movie { Name = "Morgan" },
-                new Movie { Name = "Therese" }
-            };
+        //public ActionResult Random()
+        //{
+        //    var movie = new Movie() { Name = "Shrek!" };
+        //    var customers = new List<Movie>
+        //    {
+        //        new Movie { Name = "Morgan" },
+        //        new Movie { Name = "Therese" }
+        //    };
 
-            var ViewModel = new RandomMovieViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
+        //    var ViewModel = new RandomMovieViewModel
+        //    {
+        //        Movie = movie,
+        //        Customers = customers
+        //    };
 
-            return View(ViewModel);
-        }
+        //    return View(ViewModel);
+        //}
 
         // ASP.NET MVC Attribute Route Constraints
-        [Route("movies/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
-        public ActionResult ByReleaseDate(int year, int month)
-        {
-            return Content(year + "/" + month);
-        }
+        //[Route("movies/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
+        //public ActionResult ByReleaseDate(int year, int month)
+        //{
+        //    return Content(year + "/" + month);
+        //}
 
         // movies
         

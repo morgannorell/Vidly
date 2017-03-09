@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<Vidly.Models.Movie>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movies";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @if (!Model.Any())
 {
     <h3>Det finns inga filmer upplagda än.</h3>
+    @Html.ActionLink("New", "New", "Movies", null, new { @class = "btn btn-primary" })
 }
 else
 {
     <h2>Movies</h2>
 
-    <a href="@Url.Action("New")" class="btn btn-primary btn-md">New Movie</a>
+    @Html.ActionLink("New", "New", "Movies", null, new {  @class = "btn btn-primary"})
     <p></p>
 
     <div class="col-md-12">
